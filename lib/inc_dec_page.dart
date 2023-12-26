@@ -20,7 +20,7 @@ class IncDecPage extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () => counterBloc.add(CounterDecrement()),
             tooltip: 'Decrement',
             child: const Icon(Icons.minimize),
           ),
