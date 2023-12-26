@@ -1,4 +1,5 @@
 import 'package:counter_app/cubit/counter_cubit.dart';
+import 'package:counter_app/inc_dec_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,9 +25,9 @@ class _MyHomePageState extends State<MyHomePage> {
   in both places. Create an instance of CounterCubit
   in the State of your widget and use that instance consistently.
   */
-  final counterCubit = CounterCubit();
   @override
   Widget build(BuildContext context) {
+  final counterCubit = BlocProvider.of<CounterCubit>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -51,21 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () => counterCubit.increment(),
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 16),
-          FloatingActionButton(
-            onPressed: () => counterCubit.decrement(),
-            tooltip: 'Decrement',
-            child: const Icon(Icons.minimize),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const IncDecPage(),
+            ),
+          );
+        },
+          child: const Icon(Icons.navigate_next),
       ),
     );
   }
